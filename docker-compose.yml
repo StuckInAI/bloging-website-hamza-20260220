@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  bloging-website:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_PATH: /app/database.sqlite
+      JWT_SECRET: ${JWT_SECRET}
+      SESSION_SECRET: ${SESSION_SECRET}
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+    volumes:
+      - ./database.sqlite:/app/database.sqlite
+    restart: unless-stopped
